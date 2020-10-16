@@ -90,7 +90,7 @@ export class LoginComponent implements OnInit{
     await this.usuarioService.googleInit();
     this.auth2 = this.usuarioService.auth2;
     this.attachSignin(document.getElementById('my-signin2'));
-    
+
   };
 
 

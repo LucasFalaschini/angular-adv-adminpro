@@ -10,6 +10,7 @@ import { RegisterForm } from '../interfaces/register-for.interface';
 import { LoginForm } from '../interfaces/login-form.interface';
 import { Observable, of } from 'rxjs';
 import { Router } from '@angular/router';
+import { resolve } from 'dns';
 
 const base_url = environment.base_url;
 declare const gapi: any;
@@ -32,16 +33,21 @@ export class UsuarioService {
 
   googleInit() {
 
-    gapi.load('auth2', () => {
-  
-      // Retrieve the singleton for the GoogleAuth library and set up the client.
-      this.auth2 = gapi.auth2.init({
-        client_id: '976564926572-n1p32q3q957okf50faogpdvn8137ban9.apps.googleusercontent.com',
-        cookiepolicy: 'single_host_origin',
-        // Request scopes in addition to 'profile' and 'email'
-        //scope: 'additional_scope'
+    return new Promise( resolve => {
+
+      gapi.load('auth2', () => {
+    
+        // Retrieve the singleton for the GoogleAuth library and set up the client.
+        this.auth2 = gapi.auth2.init({
+          client_id: '976564926572-n1p32q3q957okf50faogpdvn8137ban9.apps.googleusercontent.com',
+          cookiepolicy: 'single_host_origin',
+          // Request scopes in addition to 'profile' and 'email'
+          //scope: 'additional_scope'
+        });
+        resolve();
       });
-    });
+    })
+
 
 
   }
